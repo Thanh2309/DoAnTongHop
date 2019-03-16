@@ -1,0 +1,89 @@
+﻿@model IEnumerable<Edu_Hutech.Models.DS_loptruong_theoKhoa>
+
+@{
+    ViewBag.Title = "Loptruong";
+    Layout = "~/Views/Shared/_LayoutKhoa.cshtml";
+}
+
+<h2>Loptruong</h2>
+
+<table class="table">
+    <tr>
+        <th>
+            Lớp
+        </th>
+        <th>
+            Lớp trưởng
+        </th>
+        <th>
+            Họ và tên
+        </th>
+        <th colspan="2" >Chỉnh sửa</th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.malop)
+            </td>
+            <td>
+                @if(item.mssv != "")
+                {
+                    <a id="@item.malop@item.malop@item.malop"> @Html.DisplayFor(modelItem => item.mssv) </a>
+                    <input id="@item.malop" value="@Html.DisplayFor(modelItem => item.mssv)" style="display:none" disabled />
+                }
+                else
+                {
+                    <a id="@item.malop@item.malop@item.malop"> Chưa có</a>
+                    <input id="@item.malop" value="@Html.DisplayFor(modelItem => item.mssv)" style="display:none" disabled />
+                }
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.hoten)
+            </td>
+            <td>
+                <button onclick="Edit('@item.malop')"> Thay đổi</button>
+            </td>
+            <td>
+                <button id="@item.malop@item.malop" style="display:none" onclick="Save('@item.malop')"> Lưu</button>
+            </td>
+        </tr>
+    }
+
+</table>
+
+<script>
+    function Edit(malop) {
+        $('#' + malop + malop + malop).css('display', 'none');
+        $('#' + malop).removeAttr('disabled');
+        $('#' + malop).css('display', 'block');
+        $('#' + malop + malop).css('display', 'block');
+    }
+    function Save(malop) {
+        var mssv = $('#' + malop).val();
+        var from_data = new FormData();
+        from_data.append("malop", malop);
+        from_data.append("mssv", mssv);
+        $.ajax({
+            type: "POST",
+            url: '/SV5T_Khoa_Phong/Save',
+            data: from_data,
+            dataType: 'json',
+            contentType: false,
+            processData: false,
+            success: function (response) {
+                if (response.success) {
+                    alert("Đã thay đổi thành công !");
+                    location.reload();
+                }
+                else {
+                    alert(response.mess);
+                }
+            },
+            error: function (error) {
+                alert("Lỗi!!!" + error);
+            }
+        })
+    }
+</script>

@@ -1,0 +1,147 @@
+﻿<!DOCTYPE html>
+
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hutech</title>
+    <link rel="shortcut icon" href="http://sinhvien.hutech.edu.vn/assets/img/favicon/favicon.ico" type="image/x-icon">
+    @*<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/css/bootstrap.min.css" integrity="sha384-/Y6pD6FV/Vv2HJnA6t+vslU6fwYXjCFtcEpHbNJ0lyAFsXTsjBbfaDjzALeQsN6M" crossorigin="anonymous">*@
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.3.1/css/all.css" integrity="sha384-mzrmE5qonljUremFsqc01SB46JvROS7bZs3IO2EmfFsd15uHvIt+Y8vEf7N7fWAU" crossorigin="anonymous">
+    <link rel="stylesheet" type="text/css" href="~/Content/css/local.css" />
+    <link href="~/Content/css/sv5t.css" rel="stylesheet" />
+    <script src="~/Scripts/jquery-3.3.1.js"></script>
+
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
+</head>
+<body>
+    <div id="wrapper">
+        <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation" style="display:inline-block">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-ex1-collapse">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <div class="navbar-brand">
+                    <span>
+                        <img alt="logo" src="https://sinhvien.hutech.edu.vn/assets/img/logo.png" />
+                    </span>
+                </div>
+
+            </div>
+            <div class="collapse navbar-collapse navbar-ex1-collapse">
+                <ul class="nav navbar-nav navbar-right navbar-user" style="display:inline">
+                    <li class="dropdown messages-dropdown">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-envelope"></i> Thông Báo <span class="badge">2</span> <b class="caret"></b></a>
+                        <ul class="dropdown-menu">
+                            <li class="dropdown-header">2 Thông Báo</li>
+                            <li class="message-preview">
+                                <a href="#">
+                                    <span class="avatar"><i class="fa fa-bell"></i></span>
+                                    <span class="message">Thông báo!!!!</span>
+                                </a>
+                            </li>
+                        </ul>
+                    </li>
+                    <li class="dropdown user-dropdown">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-user"></i>@ViewBag.HoTen<b class="caret"></b></a>
+                        <ul class="dropdown-menu">
+                            <li><a href="@Url.Action("Thongtin_sinhvien","SinhVien5Tot")"><i class="fa fa-user"></i> Thông tin sinh viên</a></li>
+                            <li><a href="https://www.hutech.edu.vn/homepage/dong-gop-y-kien"><i class="fa fa-gear"></i> Trợ giúp</a></li>
+                            <li class="divider"></li>
+                            <li>@Html.ActionLink("Đăng Xuất", "UserLogin", "UserLogin")</li>
+
+                        </ul>
+                    </li>
+                    <li class="divider-vertical"></li>
+                    <li>
+                        <form class="navbar-search">
+                            <input type="text" placeholder="Tìm hướng dẫn, trợ giúp" class="form-control">
+                        </form>
+                    </li>
+                </ul>
+            </div>
+        </nav>
+        </div>
+    <div id="page-wrapper">
+        <div class="row col-md-2">
+            <ul id="active" class="nav navbar-nav side-nav">
+                <li><a href="@Url.Action("Index","SinhVien5Tot")"><i class="fas fa-home"></i> Trang Chủ</a></li>
+                <li class="main-menu">
+                    <a><i class="fas fa-user-graduate"></i> Sinh Viên 5 Tốt</a>
+                    <ul class="sub-menu ">
+                        <li><a id="dangky_SV5T" href="@Url.Action("SV5T","SinhVien5Tot")"><i class="fas fa-user-graduate"></i> Đăng ký </a></li>
+                        <li><a href="@Url.Action("SV5T","SinhVien5Tot")"><i class="fas fa-user-graduate"></i> Tiến độ </a></li>
+                    </ul>
+                </li>
+                <li id="loptruong" class="main-menu">
+                    <a><i class="fas fa-school"></i> Lớp Học Tiên Tiến</a>
+                    <ul class="sub-menu ">
+                        <li><a href="#" id="dangky_LHTT" onclick="dangky_lhtt()"><i class="fas fa-user-graduate"></i> Đăng Ký </a></li>
+                        <li><a href="@Url.Action("Index","LopHocTienTien")"><i class="fas fa-user-graduate"></i> Tiến độ </a></li>
+                    </ul>
+                </li>
+                <li><a href="@Url.Action("NCKH","NCKH")"><i class="fab fa-searchengin"></i> Nghiên Cứu Khoa Học</a></li>
+                <li><a href="https://www.hutech.edu.vn/phongctsv"><i class="fas fa-info-circle"></i> Tin Tức</a></li>
+                <li><a href="https://www.hutech.edu.vn/phongctsv/van-ban/bieu-mau"><i class="fas fa-question-circle"></i> Hỗ Trợ</a></li>
+                <li style="position: absolute; top:82%">
+                    <div class="card-footer">
+                        <p class="adminiconp">Bản quyền <a class="adminicon" href="@Url.Action("UserLogin","UserLogin")">©</a> 2018 15DTH11</p>
+                    </div>
+                </li>
+            </ul>
+
+        </div>
+        <div class="col-md-9 witget-body panel">
+            @RenderBody()
+        </div>
+    </div>
+</body>
+</html>
+<script>
+    function dangky_lhtt() {
+        if (window.confirm("Bạn có muốn đăng ký lớp học tiên tiến không?") == true) {
+            window.location.href = '@Url.Action("DangKy", "LopHocTienTien")';
+        }
+    }
+</script>
+<script>
+    $(document).ready(function () {
+        $.ajax({
+            type: "POST",
+            url: '/SinhVien5Tot/KiemTra_DKy',
+            contentType: false,
+            processData: false,
+            success: function (response) {
+                if (response.success) {
+                    if (response.mess == "dadangky_SV5T") {
+                        $('#dangky_SV5T').css('display', 'none');
+                        document.getElementById("dangky_SV5T").href = '#'
+                    }
+                    if (response.mess == "dadangky_LHTT") {
+                        $('#dangky_LHTT').css('display', 'none');
+                        document.getElementById("dangky_LHTT").href = '#'
+                    }
+                    if (response.lt == "koloptruong") {
+                        $('#loptruong').css('display', 'none');
+                        document.getElementById("loptruong").href = '#'
+                    }
+                    if (response.mess == "dadangky_LHTT_SV5T") {
+                        $('#dangky_LHTT').css('display', 'none');
+                        $('#dangky_SV5T').css('display', 'none');
+                        document.getElementById("dangky_LHTT").href = '#'
+                        document.getElementById("dangky_SV5T").href = '#'
+                    }
+                }
+            },
+            error: function (error) {
+                alert("Lỗi!!!" + error);
+            }
+        })
+    })  
+</script>
+<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>

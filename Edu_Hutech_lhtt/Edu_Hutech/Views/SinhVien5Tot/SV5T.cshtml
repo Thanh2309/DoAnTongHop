@@ -1,0 +1,427 @@
+﻿
+
+@{
+    ViewBag.Title = "SV5T";
+    Layout = "~/Views/Shared/_LayoutUser.cshtml";
+}
+<div class="BGtest">
+</div>
+<div class="text-container">
+    <h1>CHỌN CẤP XÉT DUYỆT</h1>
+    <div class="col text-center btnCapChung">
+        <button type="button" id="btnKhoaVien" data-toggle="modal" data-target="#modal-formKhoaVien" data-toggle="tooltip" data-placement="bottom" title="Cấp Khoa Viện" class="btn btn-outline-primary btnCap">
+            <p class="text-button-cap">KHOA / VIỆN</p>
+        </button>
+        <button type="button" id="btnTruong" data-toggle="modal" data-target="#modal-formTruong" data-toggle="tooltip" data-placement="bottom" title="Cấp Trường" class="btn btn-outline-success btnCap">
+            <p class="text-button-cap">TRƯỜNG</p>
+        </button>
+        <button type="button" id="btnThanh" data-toggle="modal" data-target="#modal-formThanh" data-toggle="tooltip" data-placement="bottom" title="Cấp Thành" class="btn btn-outline-info btnCap">
+            <p class="text-button-cap">THÀNH</p>
+        </button>
+        <button type="button" id="btnTrungUong" data-toggle="modal" data-target="#modal-formTrungUong" data-toggle="tooltip" data-placement="bottom" title="Cấp Trung Ương" class="btn btn-outline-warning btnCap">
+            <p class="text-button-cap">TRUNG ƯƠNG</p>
+        </button>
+    </div>
+</div>
+<!-- Button trigger modal -->
+<!-- Modal KhoaVien -->
+<div class="modal fade" id="modal-formKhoaVien" tabindex="-1" role="dialog" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" style="margin:200px auto" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalCenterTitle">Tiêu chí 'SV5T' cấp Khoa / Viện</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <!-- Collapse -->
+                <div class="accordion" id="accordionExample">
+                    <!-- One -->
+                    <div class="card">
+                        <div class="card-header" id="headingOne">
+                            <h5 class="mb-0">
+                                <button class="btn btn-link" type="button" data-toggle="collapse" data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+                                    1.Học tập tốt
+                                </button>
+                            </h5>
+                        </div>
+                        <div id="collapseOne" class="collapse show" aria-labelledby="headingOne" data-parent="#accordionExample">
+                            <div class="card-body">
+                                <p><strong>Bắt buộc:</strong> - Điểm năm học <strong>=2.5/4</strong> hoặc <strong>>=6.3/10</strong> </p>
+                                <p>
+                                    <strong>Yêu cầu khác:</strong> - Tham gia ít nhất 01 hoạt động (hoặc Hội thảo) về Học thuật.
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Hết One -->
+                    <!-- Two -->
+                    <div class="card">
+                        <div class="card-header" id="headingTwo">
+                            <h5 class="mb-0">
+                                <button class="btn btn-link collapsed" type="button" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
+                                    2.Thể lực tốt
+                                </button>
+                            </h5>
+                        </div>
+                        <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionExample">
+                            <div class="card-body">
+                                <strong>Đạt 01 trong các tiêu chuẩn sau:</strong>
+                                <p>- Đạt “Thanh niên khỏe” </p>
+                                <p>- Tham gia hoạt động TDTT các cấp</p>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Hết Two -->
+                    <!-- Three -->
+                    <div class="card">
+                        <div class="card-header" id="headingThree">
+                            <h5 class="mb-0">
+                                <button class="btn btn-link collapsed" type="button" data-toggle="collapse" data-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
+                                    3.Hội nhập tốt
+                                </button>
+                            </h5>
+                        </div>
+                        <div id="collapseThree" class="collapse" aria-labelledby="headingThree" data-parent="#accordionExample">
+                            <div class="card-body">
+                                <strong>Về ngoại ngữ:</strong>
+                                <p>- Đạt B1 Tiếng Anh hoặc N5 Tiếng Nhật </p>
+                                <p>- Đối với SV năm thứ 1: Điểm TB môn Ngoại ngữ năm học <strong>>= 3.0</strong></p>
+                                <strong>Về kỹ năng: </strong>
+                                <p>- Có tham gia hoạt động về Kỹ năng, Hội nhập, Giao lưu quốc tế</p>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Hết Three -->
+                    <!-- Four -->
+                    <div class="card">
+                        <div class="card-header" id="headingFour">
+                            <h5 class="mb-0">
+                                <button class="btn btn-link collapsed" type="button" data-toggle="collapse" data-target="#collapseFour" aria-expanded="false" aria-controls="collapseFour">
+                                    4.Tình nguyện tốt
+                                </button>
+                            </h5>
+                        </div>
+                        <div id="collapseFour" class="collapse" aria-labelledby="headingFour" data-parent="#accordionExample">
+                            <div class="card-body">
+                                <strong>Đạt 01 trong các tiêu chuẩn sau:</strong>
+                                <p>- Tham gia một trong các chiến dịch do Đoàn – Hội trường tổ chức</p>
+                                <p>- Tham gia ít nhất 03 hoạt động tình nguyện/năm.</p>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Hết Four -->
+                    <!-- Five -->
+                    <div class="card">
+                        <div class="card-header" id="headingFive">
+                            <h5 class="mb-0">
+                                <button class="btn btn-link collapsed" type="button" data-toggle="collapse" data-target="#collapseFive" aria-expanded="false" aria-controls="collapseFive">
+                                    5.Đạo đức tốt
+                                </button>
+                            </h5>
+                        </div>
+                        <div id="collapseFive" class="collapse" aria-labelledby="headingFive" data-parent="#accordionExample">
+                            <div class="card-body">
+                                <strong>Bắc buộc:</strong>
+                                <p>- Điểm Rèn luyện <strong>>= 80 điểm</strong></p>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Hết Five -->
+                </div>
+                <!-- Hết Collapse -->
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Đóng</button>
+                    <a href="#" id="dky_sv5t" onclick="Dky('K')">Đăng Ký</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Hết Modal KhoaVien -->
+<!-- Modal Truong -->
+<div class="modal fade" id="modal-formTruong" tabindex="-1" role="dialog" aria-hidden="false">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalCenterTitle">Tiêu chí 'SV5T' cấp Trường</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <!-- Collapse -->
+                <div class="accordion" id="accordionExample">
+                    <!-- One -->
+                    <div class="card">
+                        <div class="card-header" id="headingOne">
+                            <h5 class="mb-0">
+                                <button class="btn btn-link" type="button" data-toggle="collapse" data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+                                    1.Học tập tốt
+                                </button>
+                            </h5>
+                        </div>
+                        <div id="collapseOne" class="collapse show" aria-labelledby="headingOne" data-parent="#accordionExample">
+                            <div class="card-body">
+                                <p><strong>Bắt buộc:</strong> - Điểm năm học <strong>=2.5/4</strong> hoặc <strong>>=6.3/10</strong> </p>
+                                <p>
+                                    <strong>Yêu cầu khác:</strong> - Tham gia ít nhất 01 hoạt động (hoặc Hội thảo) về Học thuật.
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Hết One -->
+                    <!-- Two -->
+                    <div class="card">
+                        <div class="card-header" id="headingTwo">
+                            <h5 class="mb-0">
+                                <button class="btn btn-link collapsed" type="button" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
+                                    2.Thể lực tốt
+                                </button>
+                            </h5>
+                        </div>
+                        <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionExample">
+                            <div class="card-body">
+                                <strong>Đạt 01 trong các tiêu chuẩn sau:</strong>
+                                <p>- Đạt “Thanh niên khỏe” </p>
+                                <p>- Tham gia hoạt động TDTT các cấp</p>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Hết Two -->
+                    <!-- Three -->
+                    <div class="card">
+                        <div class="card-header" id="headingThree">
+                            <h5 class="mb-0">
+                                <button class="btn btn-link collapsed" type="button" data-toggle="collapse" data-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
+                                    3.Hội nhập tốt
+                                </button>
+                            </h5>
+                        </div>
+                        <div id="collapseThree" class="collapse" aria-labelledby="headingThree" data-parent="#accordionExample">
+                            <div class="card-body">
+                                <strong>Về ngoại ngữ:</strong>
+                                <p>- Đạt B1 Tiếng Anh hoặc N5 Tiếng Nhật </p>
+                                <p>- Đối với SV năm thứ 1: Điểm TB môn Ngoại ngữ năm học <strong>>= 3.0</strong></p>
+                                <strong>Về kỹ năng: </strong>
+                                <p>- Có tham gia hoạt động về Kỹ năng, Hội nhập, Giao lưu quốc tế</p>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Hết Three -->
+                    <!-- Four -->
+                    <div class="card">
+                        <div class="card-header" id="headingFour">
+                            <h5 class="mb-0">
+                                <button class="btn btn-link collapsed" type="button" data-toggle="collapse" data-target="#collapseFour" aria-expanded="false" aria-controls="collapseFour">
+                                    4.Tình nguyện tốt
+                                </button>
+                            </h5>
+                        </div>
+                        <div id="collapseFour" class="collapse" aria-labelledby="headingFour" data-parent="#accordionExample">
+                            <div class="card-body">
+                                <strong>Đạt 01 trong các tiêu chuẩn sau:</strong>
+                                <p>- Tham gia một trong các chiến dịch do Đoàn – Hội trường tổ chức</p>
+                                <p>- Tham gia ít nhất 03 hoạt động tình nguyện/năm.</p>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Hết Four -->
+                    <!-- Five -->
+                    <div class="card">
+                        <div class="card-header" id="headingFive">
+                            <h5 class="mb-0">
+                                <button class="btn btn-link collapsed" type="button" data-toggle="collapse" data-target="#collapseFive" aria-expanded="false" aria-controls="collapseFive">
+                                    5.Đạo đức tốt
+                                </button>
+                            </h5>
+                        </div>
+                        <div id="collapseFive" class="collapse" aria-labelledby="headingFive" data-parent="#accordionExample">
+                            <div class="card-body">
+                                <strong>Bắc buộc:</strong>
+                                <p>- Điểm Rèn luyện <strong>>= 80 điểm</strong></p>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Hết Five -->
+                </div>
+                <!-- Hết Collapse -->
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Đóng</button>
+                    <a href="#" id="dky_sv5t" onclick="Dky('TR')">Đăng Ký</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Hết Modal Truong -->
+<!-- Modal Thanh -->
+<div class="modal fade" id="modal-formThanh" tabindex="-1" role="dialog" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalCenterTitle">Tiêu chí 'SV5T' cấp Thành</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <!-- Collapse -->
+                <div class="accordion" id="accordionExample">
+                    <!-- One -->
+                    <div class="card">
+                        <div class="card-header" id="headingOne">
+                            <h5 class="mb-0">
+                                <button class="btn btn-link" type="button" data-toggle="collapse" data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+                                    1.Học tập tốt
+                                </button>
+                            </h5>
+                        </div>
+                        <div id="collapseOne" class="collapse show" aria-labelledby="headingOne" data-parent="#accordionExample">
+                            <div class="card-body">
+                                <p><strong>Bắt buộc:</strong> - Điểm năm học <strong>=2.5/4</strong> hoặc <strong>>=6.3/10</strong> </p>
+                                <p>
+                                    <strong>Yêu cầu khác:</strong> - Tham gia ít nhất 01 hoạt động (hoặc Hội thảo) về Học thuật.
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Hết One -->
+                    <!-- Two -->
+                    <div class="card">
+                        <div class="card-header" id="headingTwo">
+                            <h5 class="mb-0">
+                                <button class="btn btn-link collapsed" type="button" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
+                                    2.Thể lực tốt
+                                </button>
+                            </h5>
+                        </div>
+                        <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionExample">
+                            <div class="card-body">
+                                <strong>Đạt 01 trong các tiêu chuẩn sau:</strong>
+                                <p>- Đạt “Thanh niên khỏe” </p>
+                                <p>- Tham gia hoạt động TDTT các cấp</p>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Hết Two -->
+                    <!-- Three -->
+                    <div class="card">
+                        <div class="card-header" id="headingThree">
+                            <h5 class="mb-0">
+                                <button class="btn btn-link collapsed" type="button" data-toggle="collapse" data-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
+                                    3.Hội nhập tốt
+                                </button>
+                            </h5>
+                        </div>
+                        <div id="collapseThree" class="collapse" aria-labelledby="headingThree" data-parent="#accordionExample">
+                            <div class="card-body">
+                                <strong>Về ngoại ngữ:</strong>
+                                <p>- Đạt B1 Tiếng Anh hoặc N5 Tiếng Nhật </p>
+                                <p>- Đối với SV năm thứ 1: Điểm TB môn Ngoại ngữ năm học <strong>>= 3.0</strong></p>
+                                <strong>Về kỹ năng: </strong>
+                                <p>- Có tham gia hoạt động về Kỹ năng, Hội nhập, Giao lưu quốc tế</p>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Hết Three -->
+                    <!-- Four -->
+                    <div class="card">
+                        <div class="card-header" id="headingFour">
+                            <h5 class="mb-0">
+                                <button class="btn btn-link collapsed" type="button" data-toggle="collapse" data-target="#collapseFour" aria-expanded="false" aria-controls="collapseFour">
+                                    4.Tình nguyện tốt
+                                </button>
+                            </h5>
+                        </div>
+                        <div id="collapseFour" class="collapse" aria-labelledby="headingFour" data-parent="#accordionExample">
+                            <div class="card-body">
+                                <strong>Đạt 01 trong các tiêu chuẩn sau:</strong>
+                                <p>- Tham gia một trong các chiến dịch do Đoàn – Hội trường tổ chức</p>
+                                <p>- Tham gia ít nhất 03 hoạt động tình nguyện/năm.</p>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Hết Four -->
+                    <!-- Five -->
+                    <div class="card">
+                        <div class="card-header" id="headingFive">
+                            <h5 class="mb-0">
+                                <button class="btn btn-link collapsed" type="button" data-toggle="collapse" data-target="#collapseFive" aria-expanded="false" aria-controls="collapseFive">
+                                    5.Đạo đức tốt
+                                </button>
+                            </h5>
+                        </div>
+                        <div id="collapseFive" class="collapse" aria-labelledby="headingFive" data-parent="#accordionExample">
+                            <div class="card-body">
+                                <strong>Bắc buộc:</strong>
+                                <p>- Điểm Rèn luyện <strong>>= 80 điểm</strong></p>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Hết Five -->
+                </div>
+                <!-- Hết Collapse -->
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Đóng</button>
+                    <a href="#" id="dky_sv5t" onclick="Dky('TH')">Đăng Ký</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Hết Modal Thanh -->
+<!-- Modal TrungUong -->
+<div class="modal fade" id="modal-formTrungUong" tabindex="-1" role="dialog" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalCenterTitle">Tiêu chí 'SV5T' cấp Trung Ương</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                ...
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Đóng</button>
+                <a href="#" id="dky_sv5t" onclick="Dky('TW')">Đăng Ký</a>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Hết Modal TrungUong -->
+<!-- Optional JavaScript -->
+<!-- jQuery first, then Popper.js, then Bootstrap JS -->
+<script>
+    $('.btnCap').tooltip();
+    $('.collapse').collapse()
+</script>
+<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+<script>
+    function Dky(macap) {
+        var fromdata = new FormData();
+        fromdata.append("dky_sv5t", macap);
+        $.ajax({
+            type: "POST",
+            url: '/SinhVien5Tot/DKy',
+            data: fromdata,
+            dataType: 'json',
+            contentType: false,
+            processData: false,
+            success: function (response) {
+                if (response.success) {
+                    if (window.confirm("Đăng ký thành công")) {
+                        window.location.href = "/SinhVien5Tot/theodoi_SV5T?macap=" + macap;
+                    }
+                    else {
+                        window.location.href = "/SinhVien5Tot/theodoi_SV5T?macap=" + macap;
+                    }
+                }
+            }
+        });
+    }
+
+</script>

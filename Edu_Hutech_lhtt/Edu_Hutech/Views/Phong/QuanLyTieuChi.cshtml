@@ -1,0 +1,174 @@
+﻿@model IEnumerable<object>
+
+@{
+    List<Edu_Hutech.Models.TieuChuan> tchuan = Model.ToList()[0] as List<Edu_Hutech.Models.TieuChuan>;
+    List<Edu_Hutech.Models.TieuChi> tchi = Model.ToList()[1] as List<Edu_Hutech.Models.TieuChi>;
+}
+
+
+<h2>QuanLyTieuChi</h2>
+
+<p style="font-weight:bold; color:initial" onclick="box_upminhchung('@ViewBag.bien')"> Tạo mới </p>
+<table class="table">
+    <tr>
+        <th>
+            Tiêu chuẩn:
+        </th>
+        <th>
+            Tên tiêu chí:
+        </th>
+        <th>
+            Điểm:
+        </th>
+        <th></th>
+    </tr>
+
+    @foreach (var item in tchi)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.MaTieuChi)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.TenNDTieuChi)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Diem)
+            </td>
+            <td>
+                @Html.ActionLink("Edit", "Edit", new { id = item.Ma_NDTieuChi }) |
+                @Html.ActionLink("Delete", "Delete", new { id = item.Ma_NDTieuChi })
+            </td>
+        </tr>
+    }
+
+</table>
+
+<div style="top:0" class="minhchung_box" id="upminhchung">
+    <div _ngcontent-c15="" class="modal-content text-center">
+        <div _ngcontent-c15="" class="modal-header">
+            <h4 _ngcontent-c15="" class="modal-title">Thêm tài khoản mới</h4>
+            <button _ngcontent-c15="" aria-label="Close" class="close">
+                <span _ngcontent-c15="" aria-hidden="true">×</span>
+            </button>
+        </div>
+        <div _ngcontent-c15="" class="modal-body">
+            <my-image-upload _ngcontent-c15="" _nghost-c16="" ng-reflect-is-mine="true">
+                <label for="username"> Tên tiêu chuẩn: </label>
+                <select name="ma_tieuchuan">
+                    @foreach (var item in tchuan)
+                    {
+                        <option value="@item.MaTieuChi">@item.TenTieuChi</option>
+                    }
+                </select>
+                <br />
+                <label for="username"> Tên tiêu chí: </label>
+                <input style="margin-left:10px; padding-top:5px" name="ten_tieuchi" placeholder="Tên tiêu chí" type="text" id="ten_tieuchi" required oninvalid="this.setCustomValidity('Hãy nhập tên tiêu chí!')" oninput="setCustomValidity('')" />
+                <br />
+                <label for="username"> Điểm: </label>
+                <input style="margin-left:10px; padding-top:5px" name="diem" placeholder="Tên Đề Tài" type="number" min="0" id="diem" />
+                <br />
+                <br />
+                <label for="username"> Cấp tiêu chí: </label>
+                <br />
+                <div id="phancap_sv5t">
+                    <label for="username"> Khoa: </label>
+                    <input type="checkbox" id="khoa" name="khoa" value="Khoa" />
+                    <br />
+                    <label for="username"> Trường: </label>
+                    <input type="checkbox" id="truong" name="truong" value="Trường" />
+                    <br />
+                    <label for="username"> Thành: </label>
+                    <input type="checkbox" id="thanh" name="thanh" value="Thành" />
+                    <br />
+                    <label for="username"> Trung ương: </label>
+                    <input type="checkbox" id="trunguong" name="trunguong" value="Trung Ương" />
+                    <br />
+                    <label for="username"> Bắt buộc: </label>
+                    <input type="checkbox" id="batbuoc" name="batbuoc" value="Bắt Buộc" />
+                </div>
+            </my-image-upload>
+            <br />
+            <div class="input-group" style="padding-top:20px">
+                <a _ngcontent-c16="" id="Create" class="change-picture ng-star-inserted" href="#">Thêm mới</a>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    function box_upminhchung(ma_phancap) {
+        //cho hiện hộp đăng nhập trong 300ms
+        if (ma_phancap == "SV5T")
+        {
+            $('#phancap_sv5t').css('display', 'block');
+        } else {
+            $('#phancap_sv5t').css('display', 'none');
+        }
+        $('#anh_minhchung').attr('src', "/");
+        $('#upminhchung').fadeIn(300);
+        // thêm phần tử id="over" vào sau body
+        $('body').append('<div id="over">');
+        $('#Create').attr("onclick", "themmoi('" + ma_phancap + "')");
+        $('#over').fadeIn(300);
+        return false;
+    }
+    // khi click đóng hộp thoại
+    $(document).on('click', "button.close, #over", function () {
+        $('#over, .minhchung_box').fadeOut(300, function () {
+            $('#over').remove();
+        });
+        return false;
+    });
+</script>
+<script>
+    function themmoi(ma_phancap) {
+        var ma_tieuchuan = $('#ma_tieuchuan').val();
+        var ten_tieuchi = $('#ten_tieuchi').val();
+        var diem = $('#diem').val();
+        var khoa = $('#khoa').is(":checked");
+        var truong = $('#truong').is(":checked");
+        var thanh = $('#thanh').is(":checked");
+        var trunguong = $('#trunguong').is(":checked");
+        var batbuoc = $('#batbuoc').is(":checked");
+        var form_data = new FormData();
+        form_data.append("ma_tieuchuan", ma_tieuchuan);
+        form_data.append("ten_tieuchi", ten_tieuchi);
+        form_data.append("diem", diem);
+        form_data.append("khoa", khoa);
+        form_data.append("truong", truong);
+        form_data.append("thanh", thanh);
+        form_data.append("trunguong", trunguong);
+        form_data.append("batbuoc", batbuoc);
+        form_data.append("ma_phancap", ma_phancap);
+
+        $.ajax({
+            type: "POST",
+            url: '/Phong/Create',
+            data: form_data,
+            dataType: 'json',
+            contentType: false,
+            processData: false,
+            success: function (response) {
+                if (response.success) {
+                    $('#over, .minhchung_box').fadeOut(300, function () {
+                        $('#over').remove();
+                    });
+                    alert("Đã thêm thành công");
+                    if (ma_phancap == "LHTT") {
+                        $('#LHTT').click();
+                    } else {
+                        $('#SV5T').click();
+                    }
+                }
+                else {
+                    alert(response.mess);
+                }
+            },
+            error: function (error) {
+                alert("Lỗi!!!" + error);
+            }
+        })
+    }
+</script>
+<link href="~/Content/css/upminhchung.css" rel="stylesheet" />

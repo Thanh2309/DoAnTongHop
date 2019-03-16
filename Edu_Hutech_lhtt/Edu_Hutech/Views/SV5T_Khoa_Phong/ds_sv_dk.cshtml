@@ -1,0 +1,20 @@
+﻿@model IEnumerable<Edu_Hutech.Models.DsachDK_SV5T_LopResult>
+
+@foreach (var item in Model)
+{
+<tr>
+    <td>@item.Ho @item.Ten</td>
+    <td>@item.MSSV</td>
+    <td><a id="danhgia" onclick="truyen_mssv(@item.MSSV)" href="@Url.Action("danhgia_chitiet_sv","SV5T_Khoa_Phong",new { maPDK = item.MaPDK_SV5T, macap = item.MaCap })" target="_blank" style="color:red">Đánh Giá</a></td>
+</tr>
+}
+
+<script>
+    localStorage.clear();
+</script>
+<script>
+    //dung de load minh chung cho sv duoc chon
+    function truyen_mssv(mssv) {
+        localStorage.setItem("MSSV", mssv);
+    }
+</script>

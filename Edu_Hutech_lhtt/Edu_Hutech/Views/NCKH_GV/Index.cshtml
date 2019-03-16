@@ -1,0 +1,79 @@
+﻿@model IEnumerable<Edu_Hutech.Models.DS_DeTai_NCKH_theoGVResult>
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
+}
+<link href="~/Content/css/admin/trangchu.css" rel="stylesheet" />
+<h2>Index</h2>
+
+<table>
+    <tr>
+        <th>
+            Tên đề tài
+        </th>
+        <th>
+            Mã số sinh viên đăng ký
+        </th>
+        <th>
+            Ngày đăng ký
+        </th>
+        <th>
+            Tình trạng
+        </th>
+        <th></th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.TenDeTai)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.ND_DeTai)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.NgayDK)
+            </td>
+            @if (item.TinhTrang == -1)
+            {
+                <td>
+                    <p style="color:yellow">Chờ xét duyệt</p>
+                </td>
+            }
+            else if (item.TinhTrang == 0)
+            {
+                <td>
+                    <p style="color:red">Đã hủy</p>
+                </td>
+            }
+            else if (item.TinhTrang == 1)
+            {
+                <td>
+                    <p style="color:deepskyblue">Đã duyệt</p>
+                </td>
+            }
+            else if (item.TinhTrang == 2)
+            {
+                <td>
+                    <p style="color:green">Đang thực hiện</p>
+                </td>
+            }
+            else if (item.TinhTrang == 3)
+            {
+                <td>
+                    <p style="color:blue">Đã hoàn thành</p>
+                </td>
+            }
+            else
+            {
+                <td>
+                    <p style="color:gray">Không xác định</p>
+                </td>
+            }
+            <td><a id="danhgia" href="@Url.Action("KiemDuyet","NCKH_GV",new { maPDK = item.MaPDK_NCKH })" style="color:skyblue">Chi tiết</a></td>
+        </tr>
+    }
+
+</table>

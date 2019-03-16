@@ -1,0 +1,102 @@
+﻿<!DOCTYPE html>
+
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hutech</title>
+    <link rel="shortcut icon" href="http://sinhvien.hutech.edu.vn/assets/img/favicon/favicon.ico" type="image/x-icon">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/css/bootstrap.min.css" integrity="sha384-/Y6pD6FV/Vv2HJnA6t+vslU6fwYXjCFtcEpHbNJ0lyAFsXTsjBbfaDjzALeQsN6M" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.3.1/css/all.css" integrity="sha384-mzrmE5qonljUremFsqc01SB46JvROS7bZs3IO2EmfFsd15uHvIt+Y8vEf7N7fWAU" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" type="text/css" href="~/Content/css/local.css" />
+    <link href="~/Content/css/sv5t.css" rel="stylesheet" />
+    <script src="~/Scripts/jquery-3.3.1.js"></script>
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
+</head>
+<body>
+    <div id="wrapper">
+        <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation" style="display:inline-block">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-ex1-collapse">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <div class="navbar-brand">
+                    <span>
+                        <img alt="logo" src="https://sinhvien.hutech.edu.vn/assets/img/logo.png" />
+                    </span>
+                </div>
+
+            </div>
+            <div class="collapse navbar-collapse navbar-ex1-collapse">
+                <ul class="nav navbar-nav navbar-right navbar-user" style="display:inline">
+                    <li class="dropdown user-dropdown">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-user"></i>@ViewBag.HoTen<b class="caret"></b></a>
+                        <ul class="dropdown-menu">
+                           
+                            <li>@Html.ActionLink("Đăng Xuất", "UserLogin", "UserLogin")</li>
+
+                        </ul>
+                    </li>
+                    <li class="divider-vertical"></li>
+                    <li>
+                        <form class="navbar-search">
+                            <input type="text" placeholder="Tìm hướng dẫn, trợ giúp" class="form-control">
+                        </form>
+                    </li>
+                </ul>
+            </div>
+        </nav>
+    </div>
+    <div id="page-wrapper">
+        <div class="col-md-2">
+            <ul id="active" class="nav navbar-nav side-nav">
+                <li><a href="@Url.Action("Index","Admin")"><i class="fas fa-home"></i> Trang Chủ</a></li>
+                <li class="main-menu">
+                    <a><i class="fas fa-user-graduate"></i> Danh sách tài khoản </a>
+                    <ul class="sub-menu ">
+                        <li><a href="#" onclick="ds_taikhoan(2)"><i class="fab fa-searchengin"></i> DS Phòng </a></li>
+                        <li><a href="#" onclick="ds_taikhoan(3)"><i class="fab fa-searchengin"></i> DS Khoa </a></li>
+                    </ul>
+                </li>
+                <li style="position: absolute; top:82%">
+                    <div class="card-footer">
+                        <p class="adminiconp">Bản quyền <a class="adminicon" href="@Url.Action("UserLogin","UserLogin")">©</a> 2018 15DTH11</p>
+                    </div>
+                </li>
+            </ul>
+
+        </div>
+        <div class="col-md-9 witget-body panel">
+            @RenderBody()
+        </div>
+    </div>
+</body>
+</html>
+
+<script>
+    function ds_taikhoan(ma_pc) {
+        $.ajax({
+            type: "post",
+            url: '@Url.Action("DS_TaiKhoan", "Admin")',
+            data: {
+                ma_pc: ma_pc
+            },
+            success: function (a) {
+                if (a.success == true) {
+                }
+                else
+                    $('#dsach_taikhoan').html(a);
+            },
+            error: function (jqXHR, textStatus, errorThrown) {
+                alert(errorThrown)
+            },
+        });
+    }
+</script>
+<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>

@@ -1,0 +1,57 @@
+﻿@model IEnumerable<object>
+
+@{ 
+    List<Edu_Hutech.Models.TieuChi> tchi = Model.ToList()[0] as List<Edu_Hutech.Models.TieuChi>;
+    List<Edu_Hutech.Models.TieuChuan> tchuan = Model.ToList()[1] as List<Edu_Hutech.Models.TieuChuan>;
+}
+
+@{
+    ViewBag.Title = "Create";
+    Layout = "~/Views/Shared/_LayoutPhong.cshtml";
+}
+
+<h2>Create</h2>
+
+@using (Html.BeginForm()) 
+{
+    @Html.AntiForgeryToken()
+    
+    <div class="form-horizontal">
+        <h4> Tiêu chí: </h4>
+        <hr />
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+        
+       <label for="username"> Tên tiêu chuẩn: </label>
+       <select name="ma_tieuchuan">
+           @foreach(var item in tchuan)
+           {
+               <option value="@item.MaTieuChi">@item.TenTieuChi</option>
+           }
+       </select>
+
+        <label for="username"> Tên tiêu chí: </label>
+        <input style="margin-left:10px; padding-top:5px" name="ten_tieuchi" placeholder="Tên tiêu chí" type="text" id="ten_tieuchi" required oninvalid="this.setCustomValidity('Hãy nhập tên tiêu chí!')" oninput="setCustomValidity('')" />
+        
+        <label for="username"> Điểm: </label>
+        <input style="margin-left:10px; padding-top:5px" name="diem" placeholder="Tên Đề Tài" type="number" min="0" id="diem" />
+        
+        <label for="username"> Cấp tiêu chí: </label>
+        
+        <input type="checkbox" name="khoa" value="Khoa"/>
+        <input type="checkbox" name="truong" value="Trường"/>
+        <input type="checkbox" name="thanh" value="Thành"/>
+        <input type="checkbox" name="trunguong" value="Trung Ương"/>
+        <input type="checkbox" name="batbuoc" value="Bắt Buộc"/>
+        <input type="checkbox" name="lhtt" value="Lớp học tiên tiến"/>
+
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <input type="submit" value="Create" class="btn btn-default" />
+            </div>
+        </div>
+    </div>
+}
+
+<div>
+    @Html.ActionLink("Back to List", "Index")
+</div>

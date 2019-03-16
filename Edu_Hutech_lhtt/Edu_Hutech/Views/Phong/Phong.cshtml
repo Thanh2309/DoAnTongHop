@@ -1,0 +1,27 @@
+﻿
+@{
+    ViewBag.Title = "Phong";
+    Layout = "~/Views/Shared/_LayoutPhong.cshtml";
+}
+<h2>View tài khoản Phòng </h2>
+<h3>
+    Chức năng:
+</h3>
+<a style="font-size:20px" href="@Url.Action("Danhsach_dk_sv5t_tr_th_tw","Phong")">Đánh giá sinh viên 5 tốt</a>
+<br />
+<a style="font-size:20px" href="#" onclick="thoigian_dangky()">Thời Gian Đăng Ký Các Hoạt Động</a>
+
+<div id="ds_tieuchi"></div>
+<div id="thoigian_dangky"></div>
+<script>
+    function thoigian_dangky() {
+        $.ajax({
+            type: 'post',
+            url: '@Url.Action("ThoiGian_DangKy","Phong")',
+            data: null,
+            success: function (a) {
+                $("#thoigian_dangky").html(a);
+            }
+        });
+    }
+</script>

@@ -1,0 +1,37 @@
+﻿
+@{
+    ViewBag.Title = "Create";
+    Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
+}
+<h2>Mời bạn nhập Mã số sinh viên của bạn lớp trưởng lớp đăng ký :</h2>
+
+    <td>Nhập Mã số sinh viên:</td>
+    <td><input id="mssv"/></td>
+    <td><button onclick="Submit()">Lưu</button></td>
+
+
+<script>
+    function Submit() {
+        var mssv = $('#mssv').val();
+        $.ajax({
+            type: "POST",
+            url: '/SV5T_Khoa_Phong/Create',
+            data: {
+                mssv: mssv
+            },
+            dataType: 'json',
+            success: function (response) {
+                if (response.success) {
+                    alert(response.mess);
+                    window.location = "/SV5T_Khoa_Phong/LHTT_ThongKe";
+                }
+                else {
+                    alert(response.mess);
+                }
+            },
+            error: function (error) {
+                alert("Lỗi!!!" + error);
+            }
+        })
+    }
+</script>

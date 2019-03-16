@@ -1,0 +1,207 @@
+﻿@model Edu_Hutech.Models.SinhVien
+
+@{
+    ViewBag.Title = "Thongtin_sinhvien";
+    Layout = "~/Views/Shared/_LayoutUser.cshtml";
+}
+<link href="~/Content/css/about_sv.css" rel="stylesheet" />
+<h2>Thông Tin: @Html.DisplayFor(model => model.Ho) @Html.DisplayFor(model => model.Ten)</h2>
+@using (Html.BeginForm())
+{
+<form>
+    <div>
+        <hr />
+        <dl class="dl-horizontal">
+            <dt>
+                <label>Họ Tên: </label>
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.Ho) @Html.DisplayFor(model => model.Ten)
+            </dd>
+            <dt>
+                <label>Lớp: </label>
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.MaLop)
+            </dd>
+            <dt>
+                <label>Sinh Nhật:</label>
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.NgaySinh)
+            </dd>
+
+            <dt>
+                <label>Số điện thoại:</label>
+            </dt>
+
+            <dd>
+                @if (Model.SDT != null)
+                {
+                    <span>0</span>@Html.DisplayFor(model => model.SDT)
+                }
+                else
+                {
+                    <input type="number" name="sdt" placeholder="Nhập sdt của bạn" />
+                }
+            </dd>
+
+            <dt>
+                <label>Quê Quán: </label>
+            </dt>
+
+            <dd>
+
+                @if (Model.QueQuan != null)
+                {
+                    @Html.DisplayFor(model => model.QueQuan)
+                }
+                else
+                {
+                    <input type="text" name="quequan" placeholder="Nhập quê quán của bạn" />
+                }
+            </dd>
+
+            <dt>
+                <label>Giới Tính: </label>
+            </dt>
+
+            <dd>
+                @if (Model.GioiTinh == true)
+                {
+                    <span>Nam</span>
+                }
+                else
+                {
+                    <span>Nữ</span>
+                }
+            </dd>
+
+            <dt>
+                <label>Email: </label>
+            </dt>
+
+            <dd>
+                @if (Model.Email != null)
+                {
+                    @Html.DisplayFor(model => model.Email)
+                }
+                else
+                {
+                    <input type="email" name="email" placeholder="Nhập email của bạn" />
+                }
+            </dd>
+
+            <dt>
+                <label>Nơi Sinh:</label>
+            </dt>
+
+            <dd>
+                @if (Model.NoiSinh != null)
+                {
+                    @Html.DisplayFor(model => model.NoiSinh)
+                }
+                else
+                {
+                    <input type="text" name="noisinh" placeholder="Nhập nơi sinh (tỉnh/tp) của bạn" />
+                }
+            </dd>
+
+            <dt>
+                <label>Địa Chỉ Cư Trú: </label>
+            </dt>
+
+            <dd>
+                @if (Model.DiaChiCuTru != null)
+                {
+                    @Html.DisplayFor(model => model.DiaChiCuTru)
+                }
+                else
+                {
+                    <input type="text" name="diachi_cutru" placeholder="Nhập địa chỉ cư trú của bạn" />
+                }
+            </dd>
+
+            <dt>
+                <label>Địa Chỉ Liên Lạc: </label>
+            </dt>
+
+            <dd>
+                @if (Model.DiaChiLienLac != null)
+                {
+                    @Html.DisplayFor(model => model.DiaChiLienLac)
+                }
+                else
+                {
+                    <input type="text" name="diachi_lienlac" placeholder="Nhập địa chỉ liên lạc của bạn" />
+                }
+            </dd>
+
+            <dt>
+                <label>Ngày Vào Đoàn (nếu có): </label>
+            </dt>
+            <dd>
+                @if (Model.NgayKetNapDoan != null)
+                {
+                    @Html.DisplayFor(model => model.NgayKetNapDoan)
+                }
+                else
+                {
+                    <input type="date" class="ngay-about-me" name="ngay_vaodoan" placeholder="Nhập địa ngày vào đoàn của bạn" />
+                }
+            </dd>
+
+            <dt>
+                <label>Ngày Vào Đảng Dự Bị ( nếu có): </label>
+            </dt>
+
+            <dd>
+                @if (Model.NgayVaoDang_dubi_neuco != null)
+                {
+                    @Html.DisplayFor(model => model.NgayVaoDang_dubi_neuco)
+                }
+                else
+                {
+                    <input type="date" class="form-control ngay-about-me" name="ngay_dang_dubi" placeholder="Nhập địa ngày vào đảng dự bị của bạn (nếu có)" />
+                }
+            </dd>
+
+            <dt>
+                <label>Ngày Vào Đảng Chính Thức( nếu có): </label>
+            </dt>
+
+            <dd>
+                @if (Model.NgayVaoDang_chinhthuc_neuco != null)
+                {
+                    @Html.DisplayFor(model => model.NgayVaoDang_chinhthuc_neuco)
+                }
+                else
+                {
+                    <input type="date" class="form-control ngay-about-me" name="ngay_dang_chinhthuc" placeholder="Nhập địa ngày vào đảng của bạn (nếu có)" />
+                }
+            </dd>
+
+            <dt>
+                <label>Chức Vụ Đoàn (nếu có):</label>
+            </dt>
+
+            <dd>
+                @if (Model.NgayVaoDang_chinhthuc_neuco != null)
+                {
+                    @Html.DisplayFor(model => model.ChucVuDoan_neuco)
+                }
+                else
+                {
+                    <input type="text" class="form-control ngay-about-me" name="chuc_vu_doan" placeholder="Nhập chức vụ đoàn của bạn (nếu có)" />
+                }
+            </dd>
+        </dl>
+    </div>
+    <div class="input-group">
+        <input type="submit" value="Lưu thông tin" />
+    </div>
+</form>
+}

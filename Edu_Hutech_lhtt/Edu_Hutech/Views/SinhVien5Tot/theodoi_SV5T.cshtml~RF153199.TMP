@@ -1,0 +1,175 @@
+﻿@{
+    ViewBag.Title = "theodoi_SV5T";
+    Layout = "~/Views/Shared/_LayoutUser.cshtml";
+}
+<h2> Tiến độ hoàn thành tiêu chí Sinh Viên 5 Tốt</h2>
+@model IEnumerable<Edu_Hutech.Models.GetTieuChiSV5T_TheoMSSV_CapKhoaResult>
+<input type="file" name="file" accept="image/*" id="file_up" style="display:none" />
+<table id="data_sv5t">
+    <tr>
+        <th></th>
+        <th></th>
+        <th></th>
+    </tr>
+    @foreach (var item in Model)
+    {
+        <tr>
+            @if (item.Diem != 0)
+            {
+                <td>
+                    @item.TenNDTieuChi  :  @item.Diem
+                </td>
+
+            }
+            else
+            {
+                if (item.TinhTrang == false)
+                {
+                    <td>
+                        @item.TenNDTieuChi
+                    </td>
+                    <td id="minhchung"> <a class="up_minhchung button" href="#" onclick="box_upminhchung('@item.Ma_NDTieuChi')" style="color:red"> Minh chứng </a></td>
+                }
+                else
+                {
+                    <td>
+                        @item.TenNDTieuChi
+                    </td>
+                    <td id="minhchung"> <a class="up_minhchung button" href="#" onclick="show_minhchung('@item.Ma_NDTieuChi')" style="color:aqua"> Minh chứng </a></td>
+                }
+            }
+        </tr>
+    }
+</table>
+<div class="minhchung_box" id="upminhchung">
+    <div _ngcontent-c15="" class="modal-content text-center">
+        <div _ngcontent-c15="" class="modal-header">
+            <h4 _ngcontent-c15="" class="modal-title">Quản lý minh chứng</h4>
+            <button _ngcontent-c15="" aria-label="Close" class="close">
+                <span _ngcontent-c15="" aria-hidden="true">×</span>
+            </button>
+        </div>
+        <div _ngcontent-c15="" class="modal-body">
+            <my-image-upload _ngcontent-c15="" _nghost-c16="" ng-reflect-is-mine="true">
+                <input _ngcontent-c16="" class="form-control ng-star-inserted" id="files" name="files" ng2fileselect="" type="file" ng-reflect-uploader="[object Object]" hidden="">
+
+                <span _ngcontent-c16="">File &lt; 3MB</span>
+                <loader _ngcontent-c16="" ng-reflect-is-running="false">
+                    <sk-chasing-dots _nghost-c7="" ng-reflect-delay="0" ng-reflect-color="red" ng-reflect-is-running="false">
+                        <div _ngcontent-c7="" class="chasing-dots-spinner" ng-reflect-ng-class="chasing-dots-spinner" hidden="">
+                            <div _ngcontent-c7="" class="dot1 ng-star-inserted" ng-reflect-ng-class="dot1" style="background-color: red;"></div>
+                            <div _ngcontent-c7="" class="dot2 ng-star-inserted" ng-reflect-ng-class="dot2" style="background-color: red;"></div>
+                        </div>
+                    </sk-chasing-dots>
+                </loader>
+                <div _ngcontent-c16="" style="padding-left: 90px;">
+                    <div _ngcontent-c16="" class="picture-group" ng-reflect-klass="picture-group" ng-reflect-ng-class="[object Object]">
+                        <div _ngcontent-c16="" class="picture-wrapper">
+                            <img _ngcontent-c16="" id="anh_minhchung" class="ng-star-inserted">
+                        </div>
+                        <a _ngcontent-c16="" id="thaydoi_minhchung" class="change-picture ng-star-inserted" href="#">Thay đổi minh chứng</a>
+                    </div>
+                </div>
+            </my-image-upload>
+        </div>
+    </div>
+
+</div>
+
+<script>
+    function box_upminhchung(maND) {
+        //cho hiện hộp đăng nhập trong 300ms
+        $('#upminhchung').fadeIn(300);
+        $('#thaydoi_minhchung').attr("onlick", "upload('" + maND + "')");
+        /*$('#thaydoi_minhchung').click(function () {
+            upload(maND);
+            //Other code etc.
+        });*/
+        // thêm phần tử id="over" vào sau body
+        $('body').append('<div id="over">');
+        $('#over').fadeIn(300);
+        return false;
+    }
+    // khi click đóng hộp thoại
+    $(document).on('click', "button.close, #over", function () {
+        $('#over, .minhchung_box').fadeOut(300, function () {
+            $('#over').remove();
+        });
+        return false;
+    });
+</script>
+<script>
+    function upload(maND) {
+        clearFileInput("file_up");
+        $('#file_up').trigger('click');
+        $('#file_up').change(function () {
+            var formData_1 = new FormData();
+            var file = document.getElementById("file_up").files[0];
+            formData_1.append("file_up", file);
+            formData_1.append("name_file", maND);
+            $.ajax({
+                type: "POST",
+                url: '/Upload/upLoadfile',
+                data: formData_1,
+                dataType: 'json',
+                contentType: false,
+                processData: false,
+                success: function (response) {
+                    if (response.success) {
+                        $('#anh_minhchung').attr("src", response.url_img+"?" + new Date().getTime());
+                        
+                    }
+                    else {
+                        alert(response.responseText);
+                    }
+                },
+                error: function (error) {
+                    alert("Lỗi!!!" + error);
+                }
+            });
+        });
+    };
+    function clearFileInput(id) {
+        var oldInput = document.getElementById(id);
+        var newInput = document.createElement("input");
+        newInput.type = "file";
+        newInput.id = oldInput.id;
+        newInput.accept = oldInput.accept;
+        newInput.name = oldInput.name;
+        newInput.className = oldInput.className;
+        newInput.style.cssText = oldInput.style.cssText;
+        // TODO: copy any other relevant attributes
+        oldInput.parentNode.replaceChild(newInput, oldInput);
+    }
+</script>
+<script>
+    function show_minhchung(maND) {
+        var fromdata = new FormData();
+        fromdata.append("maND_TC", maND);
+        $.ajax({
+            type: "POST",
+            url: '/Upload/show_minhchung',
+            data: fromdata,
+            dataType: 'json',
+            contentType: false,
+            processData: false,
+            success: function (response) {
+                if (response.success) {
+                    $('#anh_minhchung').attr("src", response.url_img);
+                }
+            },
+            error: function (error) {
+                alert("Lỗi!!!" + error);
+            }
+        });
+        $('#upminhchung').fadeIn(300);
+        //document.getElementById("thaydoi_minhchung").onclick = upload(maND);
+        $('#thaydoi_minhchung').click(function () {
+            upload(maND);
+        });
+        $('#anh_minhchung').attr("src","/")
+    }
+</script>
+<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+<link href="~/Content/css/upminhchung.css" rel="stylesheet" />
+

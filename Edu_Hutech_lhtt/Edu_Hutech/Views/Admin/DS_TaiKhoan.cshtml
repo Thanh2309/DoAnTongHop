@@ -1,0 +1,219 @@
+﻿@model IEnumerable<object>
+
+@{ 
+    List<Edu_Hutech.Models.TaiKhoan_ADMIN> tk = Model.ToList()[0] as List<Edu_Hutech.Models.TaiKhoan_ADMIN>;
+    List<Edu_Hutech.Models.Khoa> khoa = Model.ToList()[1] as List<Edu_Hutech.Models.Khoa>;
+    List<Edu_Hutech.Models.PhongBan> pb = Model.ToList()[2] as List<Edu_Hutech.Models.PhongBan>;
+}
+
+<p style="font-weight:bold" onclick="box_upminhchung('@tk[0].PhanCap')"> Tạo mới </p>
+<table class="table">
+    <tr>
+        <th>
+            Tên tài khoản
+        </th>
+        <th>
+            Mật khẩu
+        </th>
+        <th>
+            Phân cấp
+        </th>
+        <th colspan="2"> Chỉnh sửa</th>
+    </tr>
+
+@foreach (var item in tk) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.TaiKhoan)
+        </td>
+        <td>
+            <a name="@item.TaiKhoan@item.TaiKhoan"> ******** </a>
+            <input id="@item.TaiKhoan@item.TaiKhoan" name="@item.TaiKhoan@item.TaiKhoan" value="" type="password" style="display:none" disabled required/>
+        </td>
+        <td>
+            <a id="@item.TaiKhoan">
+                @Html.DisplayFor(modelItem => item.PhanCap)
+            </a>
+        </td>
+        <td name="@item.TaiKhoan@item.TaiKhoan" >
+            <button onclick="Xoa('@item.TaiKhoan', '@item.PhanCap')"> Xóa </button>
+            <button onclick="Edit('@item.TaiKhoan@item.TaiKhoan')"> Đổi mật khẩu</button>
+        </td>
+        <td name="@item.TaiKhoan@item.TaiKhoan" style="display:none">
+            <button onclick="ChinhSua('@item.TaiKhoan', '@item.PhanCap')"> Lưu </button>
+            <button onclick="Huy(@item.PhanCap)"> Hủy </button>
+        </td>
+    </tr>
+}
+
+</table>
+
+<div class="minhchung_box" id="upminhchung">
+    <div _ngcontent-c15="" class="modal-content text-center">
+        <div _ngcontent-c15="" class="modal-header">
+            <h4 _ngcontent-c15="" class="modal-title">Thêm tài khoản mới</h4>
+            <button _ngcontent-c15="" aria-label="Close" class="close">
+                <span _ngcontent-c15="" aria-hidden="true">×</span>
+            </button>
+        </div>
+        <div _ngcontent-c15="" class="modal-body">
+            <my-image-upload _ngcontent-c15="" _nghost-c16="" ng-reflect-is-mine="true">
+                <label style="padding-right:10px"> Phòng/ Khoa: </label>
+                @if (tk[0].PhanCap == 3)
+                {
+                    <select id="phong_khoa">
+                    @foreach (var item in khoa)
+                {
+                    <option value="@item.MaKhoa"> @item.TenKhoa </option>
+                }
+                    </select>
+                }
+                else if (tk[0].PhanCap == 2)
+                {   
+                    <select id="phong_khoa">
+                    @foreach (var item in pb)
+                    {
+                        <option value="@item.MaPhongBan"> @item.TenPhongBan </option>
+                    }
+                    </select>
+                }
+            <br />
+            <label> Mật khẩu: </label>
+            <input type="password" id="pass" style="margin-left:10px" />
+            </my-image-upload>
+            <br />
+            <div class="input-group" style="padding-top:20px">
+                <a _ngcontent-c16="" id="Create" class="change-picture ng-star-inserted" href="#">Thêm mới</a>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    function Xoa(taikhoan, ma_pc) {
+        $.ajax({
+            type: "POST",
+            url: '/Admin/Xoa',
+            data: { tai_khoan: taikhoan },
+            dataType: 'json',
+            success: function (response) {
+                if (response.success) {
+                    alert(response.mess);
+                    if (ma_pc == 2) {
+                        $('#phong').click();
+                    } else if (ma_pc == 3) {
+                        $('#khoa').click();
+                    }
+                }
+                else {
+                    alert(response.mess);
+                }
+            },
+            error: function (error) {
+                alert("Lỗi!!!" + error);
+            }
+        })
+    }
+
+    function Edit(ma_tk) {
+        var tam = document.getElementsByName(ma_tk);
+        tam[0].style.display = 'none';
+        tam[1].removeAttribute('disabled');
+        tam[1].style.display = 'block';
+        tam[2].style.display = 'none';
+        tam[3].style.display = 'block';
+    }
+
+    function Huy(ma_pc) {
+        if (ma_pc == 2) {
+            $('#phong').click();
+        } else if (ma_pc == 3) {
+            $('#khoa').click();
+        }
+    }
+
+    function ChinhSua(taikhoan, ma_pc) {
+        var pass = $('#' + taikhoan + taikhoan).val();
+        $.ajax({
+            type: "POST",
+            url: '/Admin/ChinhSua',
+            data: {
+                tai_khoan: taikhoan,
+                pass: pass
+            },
+            dataType: 'json',
+            success: function (response) {
+                if (response.success) {
+                    alert(response.mess);
+                    if (ma_pc == 2) {
+                        $('#phong').click();
+                    } else if (ma_pc == 3) {
+                        $('#khoa').click();
+                    }
+                }
+                else {
+                    alert(response.mess);
+                }
+            },
+            error: function (error) {
+                alert("Lỗi!!!" + error);
+            }
+        })
+    }
+
+    function box_upminhchung(ma_pc) {
+        //cho hiện hộp đăng nhập trong 300ms
+        $('#anh_minhchung').attr('src', "/");
+        $('#upminhchung').fadeIn(300);
+        // thêm phần tử id="over" vào sau body
+        $('body').append('<div id="over">');
+        $('#Create').attr("onclick", "themmoi('" + ma_pc + "')");
+        $('#over').fadeIn(300);
+        return false;
+    }
+    // khi click đóng hộp thoại
+    $(document).on('click', "button.close, #over", function () {
+        $('#over, .minhchung_box').fadeOut(300, function () {
+            $('#over').remove();
+        });
+        return false;
+    });
+</script>
+<script>
+    function themmoi(ma_pc) {
+        var taikhoan = $('#phong_khoa').val();
+        var pass = $('#pass').val();
+        var form_data = new FormData();
+        form_data.append("taikhoan", taikhoan);
+        form_data.append("pass", pass);
+        form_data.append("ma_pc", ma_pc);
+        $.ajax({
+            type: "POST",
+            url: '/Admin/ThemMoi',
+            data: form_data,
+            dataType: 'json',
+            contentType: false,
+            processData: false,
+            success: function (response) {
+                if (response.success) {
+                    $('#over, .minhchung_box').fadeOut(300, function () {
+                        $('#over').remove();
+                    });
+                    alert("Đã thêm thành công");
+                    if (ma_pc == 2) {
+                        $('#phong').click();
+                    } else if (ma_pc == 3) {
+                        $('#khoa').click();
+                    }
+                }
+                else {
+                    alert(response.mess);
+                }
+            },
+            error: function (error) {
+                alert("Lỗi!!!" + error);
+            }
+        })
+    }
+</script>
+<link href="~/Content/css/upminhchung.css" rel="stylesheet" />

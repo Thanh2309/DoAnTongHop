@@ -1,0 +1,183 @@
+﻿
+@{
+    ViewBag.Title = "NCKH";
+    Layout = "~/Views/Shared/_LayoutUser.cshtml";
+}
+<link href="~/Content/css/nckh.css" rel="stylesheet" />
+@model IEnumerable<Edu_Hutech.Models.CanBo_HuongDan>
+@using (Html.BeginForm("NCKH", "NCKH", FormMethod.Post, new { enctype = "multipart/form-data" }))
+{
+<form style="height:inherit">
+    <h1>Đăng Ký Đề Tài Nghiên Cứu Khoa Học</h1>
+    <h3 style="color:red">@ViewBag.Thongbao</h3>
+    <div class="input-group">
+        <label for="username">1. Tên Đề Tài:</label>
+        <input style="margin-left:10px; padding-top:5px" name="ten_detai" placeholder="Tên Đề Tài" type="text" id="ten_detai" required oninvalid="this.setCustomValidity('Hãy nhập tên đề tài!')" oninput="setCustomValidity('')" />
+        <!-- required là bắt buộc phải có nếu không sẽ không submit được form -->
+    </div>
+    <div class="input-group">
+        <label>2. Danh Sách Thành Viên:</label>
+    </div>`
+    <div class="input-group">
+        <label>Sinh Viên 1:</label>
+    </div>
+    <div id="sv1" style="display:block">
+        <div class="input-group">
+            <label>Họ Tên:</label>
+            <input type="text" name="ho_ten_1" id="ho_ten_1" disabled />
+            <label>MSSV:</label>
+            <input type="number" name="mssv_1" id="mssv_1" disabled />
+        </div>
+    </div>
+    <div class="input-group">
+        <label>Sinh Viên 2:</label> <input type="checkbox" name="cb_sv2" id="cb_sv2" />
+    </div>
+    <div name="sv2" id="sv2" style="display:none">
+        <div class="input-group">
+            <label>Họ Tên:</label>
+            <input type="text" name="ho_ten_2" id="ho_ten_2" /> @ViewData["Loi1"]
+            <label>MSSV:</label>
+            <input type="number" name="mssv_2" id="mssv_2" /> @ViewData["Loi2"]
+        </div>
+    </div>
+    <div class="input-group">
+        <label>Sinh Viên 3:</label> <input type="checkbox" name="cb_sv3" id="cb_sv3" />
+    </div>
+    <div name="sv3" id="sv3" style="display:none">
+        <div class="input-group">
+            <label>Họ Tên:</label>
+            <input type="text" name="ho_ten_3" id="ho_ten_3" /> @ViewData["Loi1"]
+            <label>MSSV:</label>
+            <input type="number" name="mssv_3" id="mssv_3" /> @ViewData["Loi2"]
+        </div>
+    </div>
+    <div class="input-group">
+        <label>Sinh Viên 4:</label> <input type="checkbox" name="cb_sv4" id="cb_sv4" />
+    </div>
+    <div name="sv4" id="sv4" style="display:none">
+        <div class="input-group">
+            <label>Họ Tên:</label>
+            <input type="text" name="ho_ten_4" id="ho_ten_4" /> @ViewData["Loi1"]
+            <label>MSSV:</label>
+            <input type="number" name="mssv_4" id="mssv_4" /> @ViewData["Loi2"]
+        </div>
+    </div>
+    <div class="input-group">
+        <label>Sinh Viên 5:</label> <input type="checkbox" name="cb_sv5" id="cb_sv5" />
+    </div>
+    <div name="sv5" id="sv5" style="display:none">
+        <div class="input-group">
+            <label>Họ Tên:</label>
+            <input type="text" name="ho_ten_5" id="ho_ten_5" /> @ViewData["Loi1"]
+            <label>MSSV:</label>
+            <input type="number" name="mssv_5" id="mssv_5" /> @ViewData["Loi2"]
+        </div>
+    </div>
+    <div class="input-group">
+        <h5>3. Giảng viên hướng dẫn:</h5>
+        <select id="gvhd" name="gvhd">
+            @foreach (var item in Model)
+            {
+                <option value="@item.MaGV">@item.TenGV</option>
+            }
+        </select>
+    </div>
+    <h5>4. Nội dung nghiên cứu</h5>
+    <div class="input-group">
+        <a href="#" class="select-tep" onclick="upload('#file_noidung','#file_nd')">Chọn tệp(word)...</a>
+        <br />
+        <br />
+        <p id="file_nd"></p>
+        <input type="file" accept="application/msword,application/vnd.openxmlformats-officedocument.wordprocessingml.document" name="file_noidung" id="file_noidung" style="display:none" />
+    </div>
+    <h5>5. Sản phẩm dự kiến</h5>
+    <div class="input-group">
+        <a href="#" class="select-tep" onclick="upload('#file_sp_dukien','#file_sp')">Chọn tệp(word)...</a>
+        <br />
+        <br />
+        <p id="file_sp"></p>
+        <input type="file" accept="application/msword,application/vnd.openxmlformats-officedocument.wordprocessingml.document" name="file_sp_dukien" id="file_sp_dukien" style="display:none" />
+    </div>
+    <br />
+    <a style="margin-bottom:30px"><input type="checkbox" id="quydinh" /> Tôi đảm bảo về các thông tin đã cung cấp.</a>
+    <br />
+    <button id="dangky" type="submit" class="login" disabled> Đăng Ký </button>
+</form>
+}
+<script>
+    $(document).ready(function () {
+        $('#cb_sv5').change(function () {
+            if (this.checked)
+                $('#sv5').css('display', 'block');
+            else {
+                $('#sv5').css('display', 'none');
+                $('#ho_ten_5').val("");
+                $('#mssv_5').val("");
+            }
+        });
+        $('#cb_sv2').change(function () {
+            if (this.checked)
+                $('#sv2').css('display', 'block');
+            else {
+                $('#ho_ten_2').val("");
+                $('#mssv_2').val("");
+                $('#sv2').css('display', 'none');
+            }
+        });
+        $('#cb_sv3').change(function () {
+            if (this.checked)
+                $('#sv3').css('display', 'block');
+            else {
+                $('#ho_ten_3').val("");
+                $('#mssv_3').val("");
+                $('#sv3').css('display', 'none');
+            }
+        });
+        $('#cb_sv4').change(function () {
+            if (this.checked)
+                $('#sv4').css('display', 'block');
+            else {
+                $('#ho_ten_4').val("");
+                $('#mssv_4').val("");
+                $('#sv4').css('display', 'none');
+            }
+        });
+        $('#quydinh').change(function () {
+            if (this.checked)
+                $('#dangky').removeAttr('disabled', 'true');
+            else {
+                $('#dangky').attr('disabled', 'true');
+            }
+        });
+    });
+    function load_ten() {
+        $.ajax({
+            type: "POST",
+            url: '/NCKH/ten_sv',
+            contentType: false,
+            processData: false,
+            success: function (response) {
+                if (response.success) {
+                    $('#ho_ten_1').val(response.ten_sv);
+                    $('#mssv_1').val(response.mssv);
+                }
+            },
+            error: function (error) {
+                alert("Lỗi!!!" + error);
+            }
+        });
+    }
+    window.onload = load_ten;
+</script>
+<script>
+    function upload(id, name_file) {
+        $(id).trigger('click');
+        $(id).change(function () {
+            var filename = $(id).val().split('\\').pop();
+            $(name_file).text(filename);
+        });
+    }
+</script>
+<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+
+

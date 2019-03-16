@@ -1,0 +1,50 @@
+﻿<div id="thoigian_dangky"></div>
+<table>
+    <tr>
+        <th>Hoạt Động</th>
+        <td>Ngày Bắt Đầu</td>
+        <td>Ngày Kết Thúc</td>
+        <td></td>
+    </tr>
+    <tr>
+        <td>
+            <select id="hoatdong">
+                <option value="SV5T">Sinh Viên Năm Tốt</option>
+                <option value="NCKH">Nghiên Cứu Khoa Học</option>
+                <option value="LHTT">Lớp Học Tiên Tiến</option>
+            </select>
+        </td>
+        <td>
+            <input id="ngaybd" type="date" required />
+        </td>
+        <td>
+            <input id="ngaykt" type="date" required />
+        </td>
+        <td><button onclick="luu()">Lưu</button></td>
+    </tr>
+</table>
+<script>
+    function luu() {
+        var mahd = $("#hoatdong").val();
+        var ngaybd = $("#ngaybd").val();
+        var ngaykt = $("#ngaykt").val();
+        $.ajax({
+            type: 'post',
+            url: '@Url.Action("Capnhat_Thoigiandangky","Phong")',
+            data: {
+                maHD: mahd,
+                ngayBD: ngaybd,
+                ngayKT: ngaykt
+            },
+            dataType: 'json',
+            success: function (a) {
+                if (a.success) {
+                    alert(a.mess);
+                }
+                else {
+                    alert(a.mess)
+                }
+            },
+        });
+    }
+</script>

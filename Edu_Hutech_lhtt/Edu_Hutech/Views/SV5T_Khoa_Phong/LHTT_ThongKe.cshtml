@@ -1,0 +1,104 @@
+﻿@model IEnumerable<Edu_Hutech.Models.DSach_DK_LHTTResult>
+
+@{
+    ViewBag.Title = "LHTT_ThongKe";
+    Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
+}
+
+<li><a style="font-size:20px" href="#" id="dangky_LHTT" onclick="them_lhtt()"><i class="fas fa-user-graduate"></i> Đăng Ký </a></li>
+<table class="table">
+    <tr>
+        <th>
+            Số phiếu đăng ký
+        </th>
+        <th>
+            Mã số sinh viên
+        </th>
+        <th>
+            Họ và tên
+        </th>
+        <th>
+            Năm học
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Email)
+        </th>
+        <th></th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.MaPDK_LHTT)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.MSSV)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Ho)  @Html.DisplayFor(modelItem => item.Ten)
+            </td>
+
+            <td>
+                @Html.DisplayFor(modelItem => item.NamHoc)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Email)
+            </td>
+            <td>
+                <a onclick="truyen_mssv(@item.MSSV)" href="@Url.Action("LHTT_Admin_DanhGia", "SV5T_Khoa_Phong", new { maPDK = item.MaPDK_LHTT })"> 
+                    Chi Tiết
+                </a>
+                |
+                <a onclick="DeleteConfirm(@item.MaPDK_LHTT)">
+                    Xóa
+                </a>            
+            </td>
+        </tr>
+    }
+</table>
+<script>
+    function them_lhtt() {
+        if (window.confirm("Bạn có muốn thêm lớp học tiên tiến không?") == true) {
+            window.location.href = '@Url.Action("Create", "SV5T_Khoa_Phong")';
+        }
+    }
+</script>
+<script>
+    function DeleteConfirm(maPDK) {
+        var x = window.confirm("Đồng ý xóa ? ");
+        if (x == true) {
+            var from_data = new FormData();
+            from_data.append("maPDK", maPDK);
+            $.ajax({
+                type: "POST",
+                url: '/SV5T_Khoa_Phong/Delete',
+                data: from_data,
+                dataType: 'json',
+                contentType: false,
+                processData: false,
+                success: function (response) {
+                    if (response.success) {
+                        alert(response.mess);
+                        location.reload();
+                    }
+                    else {
+                        alert(response.mess);
+                    }
+                },
+                error: function (error) {
+                    alert("Lỗi!!!" + error);
+                }
+            })
+        }
+        else {
+            alert("");
+        }
+    }
+</script>
+<script>
+    //dung de load minh chung cho sv duoc chon
+    function truyen_mssv(mssv) {
+        localStorage.setItem("MSSV", mssv);
+    }
+</script>

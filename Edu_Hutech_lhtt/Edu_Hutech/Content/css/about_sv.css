@@ -1,0 +1,77 @@
+﻿
+dd,dt{
+    font-size:15px;
+    font-weight:400;
+    color: #000000;
+    transition:100ms ease;
+}
+
+.ngay-about-me {
+    width:auto;
+}
+.dl-horizontal dd{
+    margin-left:50%;
+    padding:1rem 1rem;
+}
+.dl-horizontal dt{
+    padding:1rem 1rem;
+}
+.dl-horizontal dd:hover{
+    border:3px dotted red;
+    font-size:20px;
+    font-weight:bold;
+    color:#3419e4;
+    text-align:center;
+}
+.dl-horizontal dt:hover {
+    border: 3px dotted red;
+    font-size: 20px;
+    font-weight: bold;
+    color: #3419e4;
+    text-align: center;
+}
+.dl-horizontal dt:hover + dd {
+    border: 3px dotted red;
+    font-size: 20px;
+    font-weight: bold;
+    color: #3419e4;
+    text-align: center;
+    background-color: #f2f2f2;
+    box-shadow:.2px .2px 4px rgba(0,0,0,.3);
+}
+    .dl-horizontal dt {
+        animation: dt-thongtin 2000ms linear;
+    }
+
+@keyframes dt-thongtin {
+    0% {
+        opacity: 0;
+        margin-left:41%;
+    }
+    50%{
+        opacity:0.5;
+    }
+    100%{
+        opacity: 1;
+        margin-left:0;
+    }
+}
+
+.dl-horizontal dd {
+    animation: dd-thongtin 3000ms ease;
+}
+@keyframes dd-thongtin {
+    0% {
+        opacity: 0;
+        margin-left: 100%;
+    }
+
+    50% {
+        opacity: 0.5;
+    }
+
+    100% {
+        opacity: 1;
+        margin-left: 50;
+    }
+}

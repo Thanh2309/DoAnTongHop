@@ -1,0 +1,55 @@
+﻿@{
+    ViewBag.Title = "Report";
+    Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
+}
+@model IEnumerable<Edu_Hutech.Models.Ds_Dat_SV5T_KhoaResult>
+<h2>Danh Sách Đạt Sinh Viên 5 Tốt Cấp Khoa</h2>
+<button onclick="location.href='@Url.Action("ExportToExcel", "Report" )'" >Xuất ra Excell</button>
+<br />
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.Ho)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Ten)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.MSSV)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.MaLop)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.NamHoc)
+        </th>
+        <th></th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Ho)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Ten)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.MSSV)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.MaLop)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.NamHoc)
+            </td>
+            <td>
+                @Html.ActionLink("Edit", "Edit", new { /* id=item.PrimaryKey */ }) |
+                @Html.ActionLink("Details", "Details", new { /* id=item.PrimaryKey */ }) |
+                @Html.ActionLink("Delete", "Delete", new { /* id=item.PrimaryKey */ })
+            </td>
+        </tr>
+    }
+
+</table>

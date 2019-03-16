@@ -1,0 +1,91 @@
+﻿body {
+    background: #000000; /* fallback for old browsers */
+    background: -webkit-linear-gradient(to right, #434343, #000000); /* Chrome 10-25, Safari 5.1-6 */
+    background: linear-gradient(to right, #434343, #000000); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+    color: white;
+    font-family: "Roboto" sans-serif;
+    display: grid;
+    grid-template-columns: repeat(2,1fr); /*Chia làm 3 cột*/
+    grid-gap: 3rem; /*Khoảng cách giữa 2 cột*/
+    height: 100%;
+    margin: auto;
+}
+
+figcaption {
+    width: 52%;
+    margin: 1rem auto;
+    padding: 1rem;
+    border: 1px dotted red;
+}
+
+.listclass label {
+    font-size: 30px;
+    display: block;
+    margin-bottom: 2rem;
+    font-weight: 2 00;
+}
+
+.listclass {
+    text-align: center;
+    position: fixed;
+}
+
+.detail-list {
+    margin: 0 100%;
+}
+
+a {
+    text-decoration: none;
+    color: white;
+}
+
+input {
+    border: none;
+    opacity: 0.8;
+    border-radius: 30px;
+    font-size: 20px;
+    text-align: center;
+    text-transform: uppercase;
+    margin-bottom: 1rem;
+    padding: 1rem 1rem;
+    background-color: yellow;
+}
+
+button {
+    margin: 1rem 2rem;
+    border: none;
+    border-radius: 20px;
+    padding: 4rem 1rem;
+    background-color: red;
+    font-size: 20px;
+}
+
+.tab-table {
+    display: none;
+}
+
+ol {
+    text-align: center;
+}
+
+    ol li {
+        margin: 2%;
+        font-size: 20px;
+        border: none;
+        outline: none;
+        /*example 5s linear 2s infinite alternate*/
+        
+    }
+
+
+
+@media (max-width: 992px) {
+    .listclass {
+        grid-column: span 2;
+        position: relative;
+    }
+
+    .detail-list {
+        margin: 0;
+    }
+}

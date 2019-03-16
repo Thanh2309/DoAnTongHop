@@ -1,0 +1,376 @@
+﻿@model Edu_Hutech.Models.ChiTietPDK_NCKH
+
+@{
+    ViewBag.Title = "XetDuyet";
+    Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
+}
+<br />
+<h2>CHI TIẾT ĐỀ TÀI NGHIÊN CỨU KHOA HỌC</h2>
+<h3 style="color:red">@ViewBag.Thongbao</h3>
+<div>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            Giáo viên hướng dẫn:
+        </dt>
+
+        <dd style="padding-left: 100px">
+            @Html.DisplayFor(model => model.tenGV_1)
+        </dd>
+
+        @if (Model.tenGV_2 != null)
+        {
+            <dt>
+                Giáo viên hướng dẫn:
+            </dt>
+
+            <dd style="padding-left: 100px">
+                @Html.DisplayFor(model => model.tenGV_2)
+            </dd>
+        }
+
+        <dt>
+            Tên Đề tài:
+        </dt>
+
+        <dd style="padding-left: 100px">
+            <input name="ten_detai" placeholder="Tên Đề Tài" type="text" id="ten_detai" value="@Html.DisplayFor(model => model.TenDeTai)" disabled />
+        </dd>
+
+        <dt>
+            Nội dung thực hiện:
+        </dt>
+
+        <dd style="padding-left: 100px">
+            <p id="file_nd">@Model.ND_DeTai</p>
+            <input onclick="upload('#file_noidung','#file_nd')" type="file" accept="application/msword" name="file_noidung" id="file_noidung" style="display:none" />
+            <p id="download_nd_NCKH">@Html.ActionLink("Download", "Download", new { maPDK = @Model.MaPDK_NCKH, ten = "noidung_NCKH" })</p>
+        </dd>
+
+        <dt>
+            Sản phẩm dự kiến thực hiện:
+        </dt>
+
+        <dd style="padding-left: 100px">
+            <p id="file_sp">@Model.SP_DeTai</p>
+            <input onclick="upload('#file_sp_dukien','#file_sp')" type="file" accept="application/msword" name="file_sp_dukien" id="file_sp_dukien" style="display:none" />
+            <p id="download_sp_NCKH">@Html.ActionLink("Download", "Download", new { maPDK = @Model.MaPDK_NCKH, ten = "sanpham_NCKH" })</p>
+        </dd>
+
+        <dt>
+            Ngày đăng ký:
+        </dt>
+
+        <dd style="padding-left: 100px">
+            @Html.DisplayFor(model => model.NgayDK)
+        </dd>
+
+        <dt>
+            Tình trạng:
+        </dt>
+
+        @if(Model.TinhTrang == 0)
+        {
+            <dd style="padding-left: 100px">
+                    <p style="color:red">Đã hủy</p>
+                </dd>
+        }
+        else if (Model.TinhTrang == 1)
+        {
+                <dd style="padding-left: 100px">
+                    <p style="color:yellow">Chờ xét duyệt</p>
+                </dd>
+            }
+        else if (Model.TinhTrang == 2)
+        {
+            <dd style="padding-left: 100px">
+                <p style="color:green">Đang thực hiện</p>
+            </dd>
+        }
+        else if (Model.TinhTrang == 3)
+        {
+            <dd style="padding-left: 100px">
+                <p style="color:blue">Đã hoàn thành</p>
+            </dd>
+        }
+        else
+        {
+            <dd style="padding-left: 100px">
+                <p style="color:gray">Không xác định</p>
+            </dd>
+        }
+
+        <dt>
+            Mã số sinh viên 1:
+        </dt>
+
+        <dd style="padding-left: 100px">
+            @Html.DisplayFor(model => model.mssv_sv1)
+        </dd>
+
+        <dt>
+            Họ và tên sinh viên 1:
+        </dt>
+
+        <dd style="padding-left: 100px">
+            @Html.DisplayFor(model => model.hoten_sv1)
+        </dd>
+
+        <dt>
+            Lớp:
+        </dt>
+
+        <dd style="padding-left: 100px">
+            @Html.DisplayFor(model => model.malop_sv1)
+        </dd>
+
+        <dt>
+            Khoa:
+        </dt>
+
+        <dd style="padding-left: 100px">
+            @Html.DisplayFor(model => model.tenkhoa)
+        </dd>
+        @if (Model.sv2 == true)
+        {
+            <dt>
+                Mã số sinh viên 2:
+            </dt>
+
+            <dd style="padding-left: 100px">
+                @Html.DisplayFor(model => model.mssv_sv2)
+            </dd>
+
+            <dt>
+                Họ và tên sinh viên 2:
+            </dt>
+
+            <dd style="padding-left: 100px">
+                @Html.DisplayFor(model => model.hoten_sv2)
+            </dd>
+
+            <dt>
+                Lớp:
+            </dt>
+
+            <dd style="padding-left: 100px">
+                @Html.DisplayFor(model => model.malop_sv2)
+            </dd>
+        }
+        @if (Model.sv3 == true)
+        {
+            <dt>
+                Mã số sinh viên 3:
+            </dt>
+
+            <dd style="padding-left: 100px">
+                @Html.DisplayFor(model => model.mssv_sv3)
+            </dd>
+
+            <dt>
+                Họ và tên sinh viên 3:
+            </dt>
+
+            <dd style="padding-left: 100px">
+                @Html.DisplayFor(model => model.hoten_sv3)
+            </dd>
+
+            <dt>
+                Lớp:
+            </dt>
+
+            <dd style="padding-left: 100px">
+                @Html.DisplayFor(model => model.malop_sv3)
+            </dd>
+        }
+        @if (Model.sv4 == true)
+        {
+            <dt>
+                Mã số sinh viên 4:
+            </dt>
+
+            <dd style="padding-left: 100px">
+                @Html.DisplayFor(model => model.mssv_sv4)
+            </dd>
+
+            <dt>
+                Họ và tên sinh viên 4:
+            </dt>
+
+            <dd style="padding-left: 100px">
+                @Html.DisplayFor(model => model.hoten_sv4)
+            </dd>
+
+            <dt>
+                Lớp:
+            </dt>
+
+            <dd style="padding-left: 100px">
+                @Html.DisplayFor(model => model.malop_sv4)
+            </dd>
+        }
+        @if (Model.sv5 == true)
+        {
+            <dt>
+                Mã số sinh viên 5:
+            </dt>
+
+            <dd style="padding-left: 100px">
+                @Html.DisplayFor(model => model.mssv_sv5)
+            </dd>
+
+            <dt>
+                Họ và tên sinh viên 5:
+            </dt>
+
+            <dd style="padding-left: 100px">
+                @Html.DisplayFor(model => model.hoten_sv5)
+            </dd>
+
+            <dt>
+                Lớp:
+            </dt>
+
+            <dd style="padding-left: 100px">
+                @Html.DisplayFor(model => model.malop_sv5)
+            </dd>
+        }
+    </dl>
+</div>
+
+<table>
+    @if (Model.TinhTrang == 1)
+    {
+        <td>
+            <button onclick="Duyet('@Model.MaPDK_NCKH')" href="#" style="color:green">Duyệt</button>
+        </td>
+        <td>
+            <button onclick="Huy('@Model.MaPDK_NCKH')" href="#" style="color:red">Loại bỏ</button>
+        </td>
+    }
+    @if (Model.TinhTrang == 2)
+    {
+        <td>
+            <button onclick="Huy('@Model.MaPDK_NCKH')" href="#" style="color:red">Loại bỏ</button>
+        </td>
+    }
+    <td>
+        <button onclick="Del('@Model.MaPDK_NCKH')" href="#" style="color:red">Xóa khỏi danh sách</button>
+    </td>
+</table>
+<br />
+<p>
+    @Html.ActionLink("Trở về danh sách", "DanhsachNCKH")
+</p>
+
+<script>
+    function Duyet(maPDK) {
+        var x = window.confirm("Đồng ý đề tài ? ");
+        if (x == true) {
+            var from_data = new FormData();
+            from_data.append("maPDK", maPDK);
+            $.ajax({
+                type: "POST",
+                url: '/SV5T_Khoa_Phong/DuyetPDK',
+                data: from_data,
+                dataType: 'json',
+                contentType: false,
+                processData: false,
+                success: function (response) {
+                    if (response.success) {
+                        alert("Cám ơn đã đồng ý ");
+                        location.reload();
+                    }
+                    else {
+                        alert(response.mess);
+                    }
+                },
+                error: function (error) {
+                    alert("Lỗi!!!" + error);
+                }
+            })
+        }
+        else {
+            alert("Cần xem xét lại ");
+        }
+    }
+</script>
+
+<script>
+    function Huy(maPDK) {
+        var x = confirm("Hủy bỏ đề tài ? ");
+        if (x == true) {
+            var y = prompt("Nhập 'Cancel' để loại bỏ đề tài");
+            if (y == "Cancel") {
+                var from_data = new FormData();
+                from_data.append("maPDK", maPDK);
+                $.ajax({
+                    type: "POST",
+                    url: '/SV5T_Khoa_Phong/HuyPDK',
+                    data: from_data,
+                    dataType: 'json',
+                    contentType: false,
+                    processData: false,
+                    success: function (response) {
+                        if (response.success) {
+                            alert("Đã hủy thành công ");
+                            location.reload();
+                        }
+                        else {
+                            alert(response.mess);
+                        }
+                    },
+                    error: function (error) {
+                        alert("Lỗi!!!" + error);
+                    }
+                })
+            }
+            else {
+                alert("Đã nhập sai");
+            }
+        }
+        else {
+            alert("Cám ơn đã xem xét lại ");
+        }
+    }
+</script>
+
+<script>
+    function Del(maPDK) {
+        var x = window.confirm("Xóa đề tài khỏi danh sách ? ");
+        if (x == true) {
+            var y = prompt("Nhập 'Delete' để xóa ");
+            if (y == "Delete") {
+                var from_data = new FormData();
+                from_data.append("maPDK", maPDK);
+                $.ajax({
+                    type: "POST",
+                    url: '/SV5T_Khoa_Phong/DelPDK',
+                    data: from_data,
+                    dataType: 'json',
+                    contentType: false,
+                    processData: false,
+                    success: function (response) {
+                        if (response.success) {
+                            alert("Đã xóa thành công ");
+                            window.location = "/SV5T_Khoa_Phong/DanhSachNCKH";
+                        }
+                        else {
+                            alert(response.mess);
+                        }
+                    },
+                    error: function (error) {
+                        alert("Lỗi!!!" + error);
+                    }
+                })
+            }
+            else {
+                alert("Đã nhập sai");
+            }
+        }
+        else {
+            alert("Hãy cẩn thận hơn ");
+        }
+    }
+</script>
+<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>

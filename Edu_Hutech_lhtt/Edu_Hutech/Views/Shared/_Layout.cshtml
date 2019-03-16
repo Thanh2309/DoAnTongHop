@@ -1,0 +1,34 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>@ViewBag.Title</title>
+    <link rel="shortcut icon" href="http://sinhvien.hutech.edu.vn/assets/img/favicon/favicon.ico" type="image/x-icon">
+    @Styles.Render("~/Content/css")
+    @Scripts.Render("~/bundles/modernizr")
+    <link href="~/Content/css/local.css" rel="stylesheet" />
+</head>
+<body onload="myFunction()">
+    <div id="loader"></div>
+    <div style="display:none;" class="body-content animate-bottom" id="LoginForm">
+        @RenderBody()
+    </div>
+
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/bootstrap")
+    @RenderSection("scripts", required: false)
+    <script>
+        var myVar;
+
+        function myFunction() {
+            myVar = setTimeout(showPage, 3000);
+        }
+
+        function showPage() {
+            document.getElementById("loader").style.display = "none";
+            document.getElementById("LoginForm").style.display = "block";
+        }
+    </script>
+</body>
+</html>

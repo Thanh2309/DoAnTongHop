@@ -1,0 +1,60 @@
+﻿
+@{
+    ViewBag.Title = "Danhsach_dk_sv5t_tr_th_tw";
+    Layout = "~/Views/Shared/_LayoutPhong.cshtml";
+}
+@model IEnumerable<Edu_Hutech.Models.DSach_DK_SV5T_Cap_TR_TH_TWResult>
+<p></p>
+<div class="input-group">
+    <select id="khoa">
+        @foreach (var item in Model)
+        {
+            <option value="@item.MaKhoa">@item.MaKhoa</option>
+        }
+    </select>
+    <select id="macap">
+        <option value="TR">Trường</option>
+        <option value="TH">Thành</option>
+        <option value="TW">Trung Ương</option>
+    </select>
+    <a href="#" onclick="load_ds()">
+        <i class="fa fa-refresh fa-spin" style="font-size:24px"></i>
+    </a>
+</div>
+<table>
+    <tr>
+        <th>Họ Tên</th>
+        <th>Mã Số Sinh Viên</th>
+        <th>Tình Trang</th>
+    </tr>
+    <tr id="ds_dk_sv5t"></tr>
+</table>
+<p id="thong_bao"></p>
+<script>
+    function load_ds() {
+        var malop = $('#khoa').val();
+        var macap = $('#macap').val();
+        $.ajax({
+            type: "post",
+            url: '@Url.Action("dsach_sv_dk_theo_khoa_cap", "Phong")',
+            data: {
+                maKhoa: malop,
+                maCap: macap,
+            },
+            success: function (a) {
+                if (a.success == true) {
+                    alert("Không có sinh viên nào được chọn!!!");
+                }
+                else
+                    $('#ds_dk_sv5t').html(a);
+            },
+            error: function (jqXHR, textStatus, errorThrown) {
+                alert(errorThrown)
+            },
+        });
+    }
+    window.onload = load_ds;
+</script>
+<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+
+

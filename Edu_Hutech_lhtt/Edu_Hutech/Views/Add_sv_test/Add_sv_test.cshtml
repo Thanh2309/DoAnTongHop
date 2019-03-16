@@ -1,0 +1,138 @@
+﻿<!--quantrong-->
+@model PagedList.IPagedList<Edu_Hutech.Models.SinhVien>
+@using PagedList.Mvc;
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
+}
+<!--quantrong-->
+<h2>@ViewBag.Xong</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            MaLop
+        </th>
+        <th>
+            Ho
+        </th>
+        <th>
+            Ten
+        </th>
+        <th>
+            NgaySinh
+        </th>
+        <th>
+            SDT
+        </th>
+        <th>
+            QueQuan
+        </th>
+        <th>
+            GioiTinh
+        </th>
+        <th>
+            password
+        </th>
+        <th>
+            Email
+        </th>
+        <th>
+            NoiSinh
+        </th>
+        <th>
+            DiaChiCuTru
+        </th>
+        <th>
+            DiaChiLienLac
+        </th>
+        <th>
+            NgayKetNapDoan
+        </th>
+        <th>
+            NgayVaoDang_dubi_neuco
+        </th>
+        <th>
+            NgayVaoDang_chinhthuc_neuco)
+        </th>
+        <th>
+            ChucVuDoan_neuco
+        </th>
+        <th>
+            LopTruong
+        </th>
+        <th></th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.MaLop)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Ho)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Ten)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.NgaySinh)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.SDT)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.QueQuan)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.GioiTinh)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.password)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Email)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.NoiSinh)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.DiaChiCuTru)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.DiaChiLienLac)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.NgayKetNapDoan)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.NgayVaoDang_dubi_neuco)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.NgayVaoDang_chinhthuc_neuco)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.ChucVuDoan_neuco)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.loptruong)
+            </td>
+            <td>
+                @Html.ActionLink("Edit", "Edit", new { id = item.MSSV }) |
+                @Html.ActionLink("Details", "Details", new { id = item.MSSV }) |
+                @Html.ActionLink("Delete", "Delete", new { id = item.MSSV })
+            </td>
+        </tr>
+    }
+
+</table>
+<br />
+<!--quantrong-->
+Page @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber) of @Model.PageCount
+@Html.PagedListPager(Model, Page_No => Url.Action("Add_sv_test",
+    new { Page_No }))
+<!--quantrong-->

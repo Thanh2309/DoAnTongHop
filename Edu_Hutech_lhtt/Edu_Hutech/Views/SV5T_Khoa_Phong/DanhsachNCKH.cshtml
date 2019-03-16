@@ -1,0 +1,92 @@
+﻿@model IEnumerable<Edu_Hutech.Models.DanhsachNCKH_Khoa>
+
+@{
+    ViewBag.Title = "DanhsachNCKH";
+    Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
+}
+
+<link href="~/Content/css/admin/trangchu.css" rel="stylesheet" />
+
+<table>
+    <tr>
+        <th>
+            Tên đề tài
+        </th>
+        <th>
+            Mã số sinh viên đăng ký
+        </th>
+        <th>
+            Ngày đăng ký
+        </th>
+        <th>
+            Tình trạng
+        </th>
+        <th>
+            Giáo viên hướng dẫn 1:
+        </th>
+        <th>
+            Giáo viên hướng dẫn 2:
+        </th>
+        <th></th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.TenDeTai)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.MSSV)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.NgayDK)
+            </td>
+            @if (item.TinhTrang == 1)
+            {
+                <td>
+                    <p style="color:yellow">Chờ xét duyệt</p>
+                </td>
+            }
+            else if (item.TinhTrang == 2)
+            {
+                <td>
+                    <p style="color:green">Đang thực hiện</p>
+                </td>
+            }
+            else if (item.TinhTrang == 3)
+            {
+                <td>
+                    <p style="color:blue">Đã hoàn thành</p>
+                </td>
+            }
+            else
+            {
+                <td>
+                    <p style="color:gray">Không xác định</p>
+                </td>
+            }
+            <td id="ten_gv1">
+                    @Html.DisplayFor(modelItem => item.ten_gv1)
+            </td>
+            @if (item.Ma_GVHD2 == null)
+            {
+                <td>
+                    Không có
+                </td>
+            }
+            else
+            {
+                <td id="ten_gv2">
+                    @Html.DisplayFor(modelItem => item.ten_gv2)
+                </td>
+            }
+            <td><a id="danhgia" href="@Url.Action("XetDuyet","SV5T_Khoa_Phong",new { maPDK = item.MaPDK_NCKH })" style="color:skyblue">Chi tiết</a></td>
+        </tr>
+    }
+
+</table>
+
+<p>
+    <a href="/SV5T_Khoa_Phong/TrangChu">Trở về</a>
+</p>

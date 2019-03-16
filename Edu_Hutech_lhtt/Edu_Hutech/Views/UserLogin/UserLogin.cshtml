@@ -1,0 +1,23 @@
+﻿@{
+    ViewBag.Title = "Đăng nhập";
+}
+<link href="~/Content/css/login.css" rel="stylesheet" />
+@using (Html.BeginForm())
+{
+    <form style="height:inherit">
+        <h1>ĐĂNG NHẬP</h1>
+        <h5 style="color: red; text-align:center; padding-top:5px"> @ViewBag.Thongbao </h5>
+        <div class="input-group">
+            <input style="padding-top:20px" name="TaiKhoan" type="text" id="username" maxlength="10" required oninvalid="this.setCustomValidity('Hãy nhập tài khoản !')" oninput="setCustomValidity('')">
+            <!-- required là bắt buộc phải có nếu không sẽ không submit được form -->
+            <label for="username">Tài khoản:</label>
+        </div>
+        <div class="input-group">
+            <input style="padding-top:20px" name="MatKhau" maxlength="20" type="password" id="password" required oninvalid="this.setCustomValidity('Hãy nhập mật khẩu !!')" oninput="setCustomValidity('')">
+            <label for="password">Mật khẩu:</label>
+        </div>
+        <button type="submit" class="login"> Đăng nhập </button>
+
+        <p>Đăng nhập không được? <a href="#">Xem hướng dẫn tại đây</a></p>
+    </form>
+}

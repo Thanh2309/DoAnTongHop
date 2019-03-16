@@ -1,0 +1,66 @@
+﻿
+@{
+    ViewBag.Title = "TrangChu";
+    Layout = "~/Views/Shared/_LayoutKhoa.cshtml";
+}
+@model Edu_Hutech.Models.ThongKe_DK
+<link href="~/Content/css/admin/trangchu.css" rel="stylesheet" />
+<h2>Số Lượng sinh viên đăng ký phong trào</h2>
+<table>
+    <tr>
+        <th>Phong Trào</th>
+        <th>Cấp Khoa</th>
+        <th>Cấp Trường</th>
+        <th>Cấp Thành/ Trung Ương</th>
+        <th>Tổng Cộng</th>
+        <th></th>
+    </tr>
+    <tr>
+        <td>Sinh Viên 5 Tốt</td>
+        <td>@Model.Sl_sv5t_khoa</td>
+        <td>@Model.Sl_sv5t_truong</td>
+        <td>@Model.Sl_sv5t_thanh_tw</td>
+        <td>@Model.Tong_dk_sv5t</td>
+        <td>
+            <div>
+                <input type="button" class="btn btn-outline-danger" onclick="location.href='@Url.Action("DanhsachDK", "SV5T_Khoa_Phong" )'" value="Đánh Giá" />
+
+                <div class="btn-group dropright">
+                    <button type="button" class="btn btn-outline-danger dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        Xuất Danh Sách
+                    </button>
+                    <div class="dropdown-menu">
+                        <!-- Dropdown menu links -->
+                        <a class="dropdown-item" style="color:white" href="@Url.Action("Dat_SV5T_Khoa","Report")">Danh sách đạt cấp khoa</a>
+                        <a class="dropdown-item" style="color:white" href="#">Danh sách đăng ký cấp trường/ thành</a>
+                    </div>
+                </div>
+            </div>
+        </td>
+    </tr>
+    <tr>
+        <td>Nghiên Cứu Khoa Học</td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td>@Model.Sl_detai_nckh</td>
+        <td>
+            <input type="button" class="btn btn-outline-danger" onclick="location.href='@Url.Action("DanhsachNCKH", "SV5T_Khoa_Phong" )'" value="Quản lý" />
+            <button href="#" class="btn btn-outline-danger">Xuất Danh Sách</button>
+        </td>
+    </tr>
+
+    <tr>
+        <td>Lớp Học Tiên Tiến</td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td>@Model.Sl_dk_lhtt</td>
+        <td>
+            <input type="button" class="btn btn-outline-danger" onclick="location.href='@Url.Action("LHTT_ThongKe", "SV5T_Khoa_Phong" )'" value="Đánh giá" />
+            <button href="#" class="btn btn-outline-danger">Xuất Danh Sách</button></td>
+    </tr>
+</table>
+
+<h2 style="color:initial">Các chức năng khác:</h2>
+<a href="/SV5T_Khoa_Phong/Loptruong">Quản lý lớp trưởng các lớp</a>
